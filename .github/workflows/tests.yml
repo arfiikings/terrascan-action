@@ -19,7 +19,7 @@ jobs:
         iac_version: 'v14'
         policy_type: 'aws'
         only_warn: true
-        ssh_key: 'test'
+        ssh_key: ${{ secrets.SSH_KEY }}
   
   run_action_no_issues:
     name: Test run action no issues
@@ -33,7 +33,7 @@ jobs:
         iac_version: 'v14'
         policy_type: 'aws'
         only_warn: true
-        ssh_key: 'test'
+        ssh_key: ${{ secrets.SSH_KEY }}
   
   codespell:
     name: Check for spelling errors
