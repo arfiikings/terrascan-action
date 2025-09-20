@@ -26,7 +26,7 @@ if [ -n "${SSH_KEY}" ]; then
 Host github.com
   HostName github.com
   User git
-  IdentityFile ~/.ssh/id_ed25519_github
+  IdentityFile ~/.ssh/id_ed25519
   IdentitiesOnly yes
 EOF
     echo "[DEBUG] ~/.ssh/config:"
