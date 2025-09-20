@@ -24,8 +24,10 @@ if [ -n "${SSH_KEY}" ]; then
     ssh-keyscan github.com >> ~/.ssh/known_hosts
     cat <<EOF > ~/.ssh/config
 Host github.com
-IdentityFile ~/.ssh/id_ed25519
-IdentitiesOnly yes
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_github
+  IdentitiesOnly yes
 EOF
     echo "[DEBUG] ~/.ssh/config:"
     cat ~/.ssh/config
