@@ -36,7 +36,7 @@ EOF
     ls -l ~/.ssh
 
     echo "[DEBUG] Testing SSH connection..."
-    ssh -T git@github.com || echo "[WARN] SSH test failed (expected if GitHub blocks without interactive TTY)"
+    ssh -i ~/.ssh/id_ed25519 -T git@github.com || echo "[WARN] SSH test failed (expected if GitHub blocks without interactive TTY)"
 fi
 
 # Retrieving SCM URL, Repository URL and REF from CI variables
