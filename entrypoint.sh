@@ -19,12 +19,12 @@ echo "INPUT_SSH_KEY=${INPUT_SSH_KEY}"
 if [ -n "${SSH_KEY}" ]; then
     echo "Using SSH key for authentication"
     mkdir -p ~/.ssh
-    echo "${SSH_KEY}" | base64 -d > ~/.ssh/id_ed25519_github
-    chmod 600 ~/.ssh/id_ed25519_github
+    echo "${SSH_KEY}" | base64 -d > ~/.ssh/id_ed25519
+    chmod 600 ~/.ssh/id_ed25519
     ssh-keyscan github.com >> ~/.ssh/known_hosts
     cat <<EOF > ~/.ssh/config
 Host github.com
-IdentityFile ~/.ssh/id_ed25519_github
+IdentityFile ~/.ssh/id_ed25519
 IdentitiesOnly yes
 EOF
     echo "[DEBUG] ~/.ssh/config:"
