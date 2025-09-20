@@ -1,5 +1,4 @@
 #!/bin/sh -l
-set -x 
 
 # Displaying options
 echo "Running Terrascan GitHub Action with the following options:"
@@ -29,9 +28,6 @@ IdentityFile /home/runner/.ssh/id_ed25519_github
 IdentitiesOnly yes
 EOF
 fi
-
-
-
 
 # Retrieving SCM URL, Repository URL and REF from CI variables
 if [ "x${GITHUB_SERVER_URL}" != "x" ]; then

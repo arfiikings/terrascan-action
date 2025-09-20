@@ -20,8 +20,6 @@ jobs:
         policy_type: 'aws'
         only_warn: true
         ssh_key: 'test'
-    - name: Check if it's using the ssh key
-      run: echo $SSH_KEY
   
   run_action_no_issues:
     name: Test run action no issues
