@@ -14,6 +14,23 @@ echo "INPUT_SARIF_UPLOAD=${INPUT_SARIF_UPLOAD}"
 echo "INPUT_VERBOSE=${INPUT_VERBOSE}"
 echo "INPUT_FIND_VULNERABILITIES=${INPUT_FIND_VULNERABILITIES}"
 echo "INPUT_WEBHOOK_URL=${INPUT_WEBHOOK_URL}"
+echo "INPUT_SSH_KEY=${SSH_KEY}"
+# Add SSH key if provided
+if [ "x${SSH_KEY}" != "x" ]; then
+    echo "Using SSH key for authentication"
+    mkdir -p ~/.ssh
+    echo "${SSH_KEY}" | base64 -d > ~/.ssh/id_ed25519_github
+    chmod 600 ~/.ssh/id_ed25519_github
+    ssh-keyscan github.com >> ~/.ssh/known_hosts
+    cat <<EOF > ~/.ssh/config
+    Host github.com
+        IdentityFile ~/.ssh/id_ed25519_github
+        IdentitiesOnly yes
+    EOF
+else
+    echo "No SSH key provided, using default authentication method"
+fi
+
 
 # Retrieving SCM URL, Repository URL and REF from CI variables
 if [ "x${GITHUB_SERVER_URL}" != "x" ]; then
