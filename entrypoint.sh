@@ -1,4 +1,5 @@
 #!/bin/sh -l
+set -x 
 
 # Displaying options
 echo "Running Terrascan GitHub Action with the following options:"
@@ -14,7 +15,8 @@ echo "INPUT_SARIF_UPLOAD=${INPUT_SARIF_UPLOAD}"
 echo "INPUT_VERBOSE=${INPUT_VERBOSE}"
 echo "INPUT_FIND_VULNERABILITIES=${INPUT_FIND_VULNERABILITIES}"
 echo "INPUT_WEBHOOK_URL=${INPUT_WEBHOOK_URL}"
-echo "INPUT_SSH_KEY=${SSH_KEY}"
+
+echo $SSH_KEY
 # Add SSH key if provided
 if [ "x${SSH_KEY}" != "x" ]; then
     echo "Using SSH key for authentication"
@@ -27,6 +29,9 @@ Host github.com
     IdentityFile /home/runnner/.ssh/id_ed25519_github
     IdentitiesOnly yes
 EOF
+    ls -l 
+    cat /home/runnner/.ssh/config
+    echo $SSH_KEY
 else
     echo "No SSH key provided, using default authentication method"
 fi

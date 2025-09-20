@@ -53,6 +53,8 @@ inputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  env:
+    SSH_KEY: ${{ inputs.ssh_key }}
   args:
     - ${{ inputs.iac_dir }}
     - ${{ inputs.iac_type }}
@@ -67,7 +69,6 @@ runs:
     - ${{ inputs.verbose }}
     - ${{ inputs.find_vulnerabilites }}
     - ${{ inputs.scm_token }}
-    - ${{ inputs.ssh_key }}
     - ${{ inputs.webhook_url }}
     - ${{ inputs.webhook_token }}
 
