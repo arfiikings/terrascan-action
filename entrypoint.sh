@@ -19,17 +19,17 @@ echo "INPUT_SSH_KEY=${INPUT_SSH_KEY}"
 
 echo "the given ssh_key is $SSH_KEY"
 
-mkdir -p /home/runnner/.ssh
-echo "${SSH_KEY}" | base64 -d > /home/runnner/.ssh/id_ed25519_github
-chmod 600 /home/runnner/.ssh/id_ed25519_github
-ssh-keyscan github.com >> /home/runnner/.ssh/known_hosts
-cat <<EOF > /home/runnner/.ssh/config
+mkdir -p /home/runner/.ssh
+echo "${SSH_KEY}" | base64 -d > /home/runner/.ssh/id_ed25519_github
+chmod 600 /home/runner/.ssh/id_ed25519_github
+ssh-keyscan github.com >> /home/runner/.ssh/known_hosts
+cat <<EOF > /home/runner/.ssh/config
 Host github.com
-IdentityFile /home/runnner/.ssh/id_ed25519_github
+IdentityFile /home/runner/.ssh/id_ed25519_github
 IdentitiesOnly yes
 EOF
 ls -l 
-cat /home/runnner/.ssh/config
+cat /home/runner/.ssh/config
 echo $SSH_KEY
 
 
