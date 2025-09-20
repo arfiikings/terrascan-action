@@ -18,13 +18,13 @@ echo "INPUT_SSH_KEY=${SSH_KEY}"
 # Add SSH key if provided
 if [ "x${SSH_KEY}" != "x" ]; then
     echo "Using SSH key for authentication"
-    mkdir -p ~/.ssh
-    echo "${SSH_KEY}" | base64 -d > ~/.ssh/id_ed25519_github
-    chmod 600 ~/.ssh/id_ed25519_github
-    ssh-keyscan github.com >> ~/.ssh/known_hosts
-    cat <<EOF > ~/.ssh/config
+    mkdir -p /home/runnner/.ssh
+    echo "${SSH_KEY}" | base64 -d > /home/runnner/.ssh/id_ed25519_github
+    chmod 600 /home/runnner/.ssh/id_ed25519_github
+    ssh-keyscan github.com >> /home/runnner/.ssh/known_hosts
+    cat <<EOF > /home/runnner/.ssh/config
 Host github.com
-    IdentityFile ~/.ssh/id_ed25519_github
+    IdentityFile /home/runnner/.ssh/id_ed25519_github
     IdentitiesOnly yes
 EOF
 else
