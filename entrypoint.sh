@@ -17,25 +17,20 @@ echo "INPUT_FIND_VULNERABILITIES=${INPUT_FIND_VULNERABILITIES}"
 echo "INPUT_WEBHOOK_URL=${INPUT_WEBHOOK_URL}"
 echo "INPUT_SSH_KEY=${INPUT_SSH_KEY}"
 
-echo $SSH_KEY
-# Add SSH key if provided
-if [ "x${SSH_KEY}" != "x" ]; then
-    echo "Using SSH key for authentication"
-    mkdir -p /home/runnner/.ssh
-    echo "${SSH_KEY}" | base64 -d > /home/runnner/.ssh/id_ed25519_github
-    chmod 600 /home/runnner/.ssh/id_ed25519_github
-    ssh-keyscan github.com >> /home/runnner/.ssh/known_hosts
-    cat <<EOF > /home/runnner/.ssh/config
+echo "the given ssh_key is $SSH_KEY"
+
+mkdir -p /home/runnner/.ssh
+echo "${SSH_KEY}" | base64 -d > /home/runnner/.ssh/id_ed25519_github
+chmod 600 /home/runnner/.ssh/id_ed25519_github
+ssh-keyscan github.com >> /home/runnner/.ssh/known_hosts
+cat <<EOF > /home/runnner/.ssh/config
 Host github.com
-    IdentityFile /home/runnner/.ssh/id_ed25519_github
-    IdentitiesOnly yes
+IdentityFile /home/runnner/.ssh/id_ed25519_github
+IdentitiesOnly yes
 EOF
-    ls -l 
-    cat /home/runnner/.ssh/config
-    echo $SSH_KEY
-else
-    echo "No SSH key provided, using default authentication method"
-fi
+ls -l 
+cat /home/runnner/.ssh/config
+echo $SSH_KEY
 
 
 # Retrieving SCM URL, Repository URL and REF from CI variables
