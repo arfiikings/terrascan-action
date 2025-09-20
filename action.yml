@@ -41,6 +41,9 @@ inputs:
   scm_token:
     description: 'will use given access token when authenticating to provided SCM to scan IaC templates/modules'
     required: false
+  ssh_key:
+    description: 'the private SSH key to use when authenticating to the SCM to scan IaC templates/modules'
+    required: false
   webhook_url:
     description: 'the URL where scanned report and normalized config json will be sent'
     required: false
@@ -64,6 +67,7 @@ runs:
     - ${{ inputs.verbose }}
     - ${{ inputs.find_vulnerabilites }}
     - ${{ inputs.scm_token }}
+    - ${{ inputs.ssh_key }}
     - ${{ inputs.webhook_url }}
     - ${{ inputs.webhook_token }}
 
