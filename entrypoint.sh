@@ -23,10 +23,10 @@ if [ "x${SSH_KEY}" != "x" ]; then
     chmod 600 ~/.ssh/id_ed25519_github
     ssh-keyscan github.com >> ~/.ssh/known_hosts
     cat <<EOF > ~/.ssh/config
-    Host github.com
-        IdentityFile ~/.ssh/id_ed25519_github
-        IdentitiesOnly yes
-    EOF
+Host github.com
+    IdentityFile ~/.ssh/id_ed25519_github
+    IdentitiesOnly yes
+EOF
 else
     echo "No SSH key provided, using default authentication method"
 fi
