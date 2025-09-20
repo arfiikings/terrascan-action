@@ -17,20 +17,20 @@ echo "INPUT_FIND_VULNERABILITIES=${INPUT_FIND_VULNERABILITIES}"
 echo "INPUT_WEBHOOK_URL=${INPUT_WEBHOOK_URL}"
 echo "INPUT_SSH_KEY=${INPUT_SSH_KEY}"
 
-echo "the given ssh_key is $SSH_KEY"
-
-mkdir -p /home/runner/.ssh
-echo "${SSH_KEY}" | base64 -d > /home/runner/.ssh/id_ed25519_github
-chmod 600 /home/runner/.ssh/id_ed25519_github
-ssh-keyscan github.com >> /home/runner/.ssh/known_hosts
-cat <<EOF > /home/runner/.ssh/config
+if [ -n "${SSH_KEY}" ]; then
+    echo "Using SSH key for authentication"
+    mkdir -p /home/runner/.ssh
+    echo "${SSH_KEY}" | base64 -d > /home/runner/.ssh/id_ed25519_github
+    chmod 600 /home/runner/.ssh/id_ed25519_github
+    ssh-keyscan github.com >> /home/runner/.ssh/known_hosts
+    cat <<EOF > /home/runner/.ssh/config
 Host github.com
 IdentityFile /home/runner/.ssh/id_ed25519_github
 IdentitiesOnly yes
 EOF
-ls -l 
-cat /home/runner/.ssh/config
-echo $SSH_KEY
+fi
+
+
 
 
 # Retrieving SCM URL, Repository URL and REF from CI variables
